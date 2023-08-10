@@ -34,14 +34,10 @@ jobs:
         run: npm ci
       - name: Build with VitePress
         run: npm run docs:build
-      - name: debug
-        run: ls -al .
-      - name: tree
-        run: tree .
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: docs/.vitepress/dist
+          path: .vitepress/dist
 
   # Deployment job
   deploy:
