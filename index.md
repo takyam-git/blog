@@ -12,12 +12,14 @@ hero:
 ---
 
 <script setup>
-import { data } from './.vitepress/entries.data.ts';
-const entries = data.reverse().slice(0, 4);
+import { data } from '.vitepress/entries.data.ts';
+const entries = data.reverse().slice(0, 6);
 </script>
 
 <div class="home-entries-container">
-    <h3 class="entries-title">Entries</h3>
+    <h3 class="entries-title">
+        <a href="/entries">Entries</a>
+    </h3>
     <section class="home-entries">
         <a v-for="(entry, index) in entries" :key="index" :href="entry.url">
             <p class="article-title">{{ entry.frontmatter.title }}</p>

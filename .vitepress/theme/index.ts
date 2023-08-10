@@ -13,7 +13,4 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // ...
   },
-  themeConfig: {
-    logo: "/images/takos.jpg",
-  },
 };

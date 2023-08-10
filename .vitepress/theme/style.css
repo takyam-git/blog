@@ -96,3 +96,9 @@
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand) !important;
 }
+
+.vp-doc img {
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  padding: 4px;
+}
