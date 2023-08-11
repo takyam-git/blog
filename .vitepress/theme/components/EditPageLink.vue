@@ -3,8 +3,9 @@ import { ref, defineProps, computed } from "vue";
 import queryString from "query-string";
 const props = defineProps<{ path?: string }>();
 const token = ref(window.localStorage.getItem("github_token") ?? "");
+const queryValue = computed(() => queryString.stringify({ path: props.path }));
 const editPageUrl = computed(() =>
-  token ? `/edit/?${queryString.stringify({ path: props.path })}}` : null,
+  token ? `/edit/${queryValue.value ? `?${queryValue.value}` : ""}` : null,
 );
 </script>
 
@@ -20,6 +21,7 @@ const editPageUrl = computed(() =>
 .edit-link-container {
   display: flex;
   justify-content: center;
+  padding: 3rem 0;
 
   a {
     font-size: 0.8rem;

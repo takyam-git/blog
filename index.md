@@ -33,7 +33,7 @@ const entries = [...data].reverse().slice(0, 6);
     <EditPageLink />
 </ClientOnly>
 
-<style>
+<style lang="scss">
 .home-entries-container {
     padding: 0 24px;
 }
@@ -83,11 +83,6 @@ const entries = [...data].reverse().slice(0, 6);
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.edit-link-container {
-    margin-top: 5rem;
-    text-align: center;
 }
 
 @media (min-width: 640px) {
