@@ -33,7 +33,7 @@ const entries = [...data].reverse().slice(0, 6);
     <EditPageLink />
 </ClientOnly>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .home-entries-container {
     padding: 0 24px;
 }
