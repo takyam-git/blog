@@ -5,7 +5,9 @@ const props = defineProps<{ path?: string }>();
 const token = ref(window.localStorage.getItem("github_token") ?? "");
 const queryValue = computed(() => queryString.stringify({ path: props.path }));
 const editPageUrl = computed(() =>
-  token ? `/edit/${queryValue.value ? `?${queryValue.value}` : ""}` : null,
+  token.value
+    ? `/edit/${queryValue.value ? `?${queryValue.value}` : ""}`
+    : null,
 );
 </script>
 
