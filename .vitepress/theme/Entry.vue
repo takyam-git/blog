@@ -3,11 +3,9 @@ import { computed, ref } from "vue";
 import VPDoc from "vitepress/dist/client/theme-default/components/VPDoc.vue";
 import { useData, useRoute } from "vitepress";
 import { data as entries } from "../entries.data.ts";
+import EditPageLink from "./components/EditPageLink.vue";
 const data = useData();
 const route = useRoute();
-const hasToken = ref(
-  (window.localStorage.getItem("github_token") ?? "") !== "",
-);
 const title = computed(() => data.frontmatter?.value?.title ?? null);
 const emoji = computed(() => data.frontmatter?.value?.emoji ?? null);
 const date = computed(() => data.frontmatter?.value?.date ?? null);
@@ -33,11 +31,6 @@ const next = computed(() =>
         link: entries[pageIndex.value - 1]?.url,
         emoji: entries[pageIndex.value - 1]?.frontmatter?.emoji ?? null,
       },
-);
-const editPageUrl = computed(() =>
-  hasToken
-    ? `/edit/index.html?path=${window.encodeURIComponent(route.path)}`
-    : null,
 );
 </script>
 
@@ -79,9 +72,9 @@ const editPageUrl = computed(() =>
       </div>
     </template>
     <template #doc-bottom>
-      <div class="doc-bottom">
-        <a :href="editPageUrl"><i class="material-icons">edit</i> 編集する</a>
-      </div>
+      <ClientOnly>
+        <edit-page-link :path="route.path" />
+      </ClientOnly>
     </template>
   </VPDoc>
 </template>
@@ -181,26 +174,6 @@ const editPageUrl = computed(() =>
         font-weight: normal;
         font-style: normal;
       }
-    }
-  }
-}
-.doc-bottom {
-  display: flex;
-  padding: 5rem 0;
-  justify-content: center;
-
-  a {
-    font-size: 0.8rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    &:hover {
-      color: var(--vp-c-text-2);
-    }
-
-    i.material-icons {
-      font-size: 0.8rem;
     }
   }
 }

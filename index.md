@@ -12,10 +12,9 @@ hero:
 ---
 
 <script setup>
-import { ref } from 'vue';
-import { data } from '.vitepress/entries.data.ts';
+import { data } from '.vitepress/entries.data.ts'; 
+import EditPageLink from ".vitepress/theme/components/EditPageLink.vue"; 
 const entries = [...data].reverse().slice(0, 6);
-const token = ref(window.localStorage.getItem('github_token') ?? "");
 </script>
 
 <div class="home-entries-container">
@@ -30,9 +29,9 @@ const token = ref(window.localStorage.getItem('github_token') ?? "");
         </a>
     </section>
 </div>
-<div v-if="token" class="edit-link-container">
-<a href="/edit/">EDIT</a>
-</div>
+<ClientOnly>
+    <EditPageLink />
+</ClientOnly>
 
 <style>
 .home-entries-container {
