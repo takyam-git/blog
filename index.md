@@ -13,7 +13,7 @@ hero:
 
 <script setup>
 import { data } from '.vitepress/entries.data.ts';
-const entries = data.reverse().slice(0, 6);
+const entries = [...data].reverse().slice(0, 6);
 </script>
 
 <div class="home-entries-container">

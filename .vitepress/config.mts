@@ -6,8 +6,6 @@ export default defineConfig({
   description: "takos blog",
   lang: "ja",
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    head: [["link", { rel: "icon", href: "/favicon.ico" }]],
     nav: [{ text: "Entries", link: "/entries" }],
 
     search: {
@@ -24,5 +22,34 @@ export default defineConfig({
         link: "https://zenn.dev/takos",
       },
     ],
+  },
+  async transformHead(context) {
+    const ogUrl = `https://takos.dev/${context.pageData.filePath
+      .replace(/^\//, "")
+      .replace(/\.md$/, ".html")}`;
+    const isEntry = context.pageData.filePath.startsWith("entries/");
+    return [
+      ["link", { rel: "icon", href: "/favicon.ico" }],
+      [
+        "link",
+        {
+          rel: "preload",
+          href: "/fonts/material-design-icons-4.0.0.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "",
+        },
+      ],
+      [
+        "meta",
+        { property: "og:image", content: "https://takos.dev/images/takos.jpg" },
+      ],
+      ["meta", { property: "og:site_name", content: "takos.dev" }],
+      ["meta", { property: "twitter:card", content: "summary" }],
+      ["meta", { property: "twitter:site", content: "@takos_dx" }],
+      ["meta", { property: "og:title", content: context.pageData.title }],
+      ["meta", { property: "og:url", content: ogUrl }],
+      ["meta", { property: "og:type", content: isEntry ? "article" : "blog" }],
+    ];
   },
 });
