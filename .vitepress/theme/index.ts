@@ -1,5 +1,5 @@
 // https://vitepress.dev/guide/custom-theme
-import { h } from "vue";
+import { h, watch } from "vue";
 import Theme from "vitepress/theme";
 import "./style.css";
 import Entry from "./Entry.vue";
@@ -13,5 +13,12 @@ export default {
   },
   enhanceApp({ app, router, siteData }) {
     app.component("entry", Entry);
+    if (globalThis && globalThis.gtag) {
+      watch(router.route, () => {
+        globalThis.gtag("config", globalThis.GA_MEASUREMENT_ID, {
+          page_path: router.route.path,
+        });
+      });
+    }
   },
 };

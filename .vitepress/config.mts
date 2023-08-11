@@ -50,6 +50,21 @@ export default defineConfig({
       ["meta", { property: "og:title", content: context.pageData.title }],
       ["meta", { property: "og:url", content: ogUrl }],
       ["meta", { property: "og:type", content: isEntry ? "article" : "blog" }],
+      [
+        "script",
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-X9FWQ65JKL",
+          async: true,
+        },
+      ],
+      [
+        "script",
+        {},
+        "window.dataLayer = window.dataLayer || [];" +
+          "  function gtag(){dataLayer.push(arguments);}" +
+          "  gtag('js', new Date());" +
+          "  gtag('config', 'G-X9FWQ65JKL');",
+      ],
     ];
   },
 });
