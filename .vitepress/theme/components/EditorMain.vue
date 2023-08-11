@@ -67,12 +67,13 @@ const clearToken = () => {
   window.localStorage.setItem(TOKEN_KEY, "");
 };
 
-const encodeBase64 = async (...text) => {
+const encodeBase64 = async (...text): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
-      const offset = reader.result.indexOf(",") + 1;
-      resolve(reader.result.slice(offset));
+      const value = reader.result as string;
+      const offset = value.indexOf(",") + 1;
+      resolve(value.slice(offset));
     };
     reader.onerror = (error) => reject(error);
     reader.readAsDataURL(new Blob(text));
@@ -85,28 +86,28 @@ const onSaveEntry = async () => {
     return;
   }
   const base64body = await encodeBase64(body.value);
-  console.log(base64body);
   if (!window.confirm("Do you want to save entry?")) {
     return;
   }
   disabled.value = true;
   try {
-    const res = await axios.put(
-      `https://api.github.com/repos/takyam-git/blog/contents/entries/${filePath.value}.md`,
-      {
-        message: "save document from editor",
-        branch: "main",
-        content: base64body,
+    const apiUrl = `https://api.github.com/repos/takyam-git/blog/contents/entries/${filePath.value}.md`;
+    const payload: Record<string, string> = {
+      message: "save document from editor",
+      branch: "main",
+      content: base64body,
+    };
+    if (targetEntry.value) {
+      const fileMetaResponse = await axios.get(apiUrl);
+      payload.sha = fileMetaResponse.data.sha;
+    }
+    const res = await axios.put(apiUrl, payload, {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${token.value}`,
+        "X-GitHub-Api-Version": "2022-11-28",
       },
-      {
-        headers: {
-          Accept: "application/vnd.github+json",
-          Authorization: `Bearer ${token.value}`,
-          "X-GitHub-Api-Version": "2022-11-28",
-        },
-      },
-    );
-    console.log(res);
+    });
     window.alert("save succeed!");
   } catch (error) {
     console.error(error);
