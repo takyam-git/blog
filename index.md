@@ -12,8 +12,10 @@ hero:
 ---
 
 <script setup>
+import { ref } from 'vue';
 import { data } from '.vitepress/entries.data.ts';
 const entries = [...data].reverse().slice(0, 6);
+const token = ref(window.localStorage.getItem('github_token') ?? "");
 </script>
 
 <div class="home-entries-container">
@@ -27,6 +29,9 @@ const entries = [...data].reverse().slice(0, 6);
             <p v-if="entry.frontmatter.date" class="date">{{ entry.frontmatter.date }}</p>
         </a>
     </section>
+</div>
+<div v-if="token" class="edit-link-container">
+<a href="/edit/">EDIT</a>
 </div>
 
 <style>
@@ -79,6 +84,11 @@ const entries = [...data].reverse().slice(0, 6);
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.edit-link-container {
+    margin-top: 5rem;
+    text-align: center;
 }
 
 @media (min-width: 640px) {

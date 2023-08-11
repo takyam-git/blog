@@ -104,10 +104,10 @@
 }
 
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 24px; /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -125,5 +125,52 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Support for IE. */
-  font-feature-settings: 'liga';
+  font-feature-settings: "liga";
+}
+
+input, textarea {
+  background-color: var(--vp-input-bg-color);
+  border: 1px solid var(--vp-input-border-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.4rem;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--vp-input-hover-border-color);
+}
+
+.primary-button {
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-button-brand-bg);
+  border: 1px solid var(--vp-button-brand-border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+}
+.primary-button:hover {
+  color: var(--vp-button-brand-hover-text);
+  background-color: var(--vp-button-brand-hover-bg);
+  border: 1px solid var(--vp-button-brand-hover-border);
+}
+.primary-button:active {
+  color: var(--vp-button-brand-active-text);
+  background-color: var(--vp-button-brand-active-bg);
+  border: 1px solid var(--vp-button-brand-active-border);
+}
+
+.alt-button {
+  color: var(--vp-button-alt-text);
+  background-color: var(--vp-button-alt-bg);
+  border: 1px solid var(--vp-button-alt-border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+}
+.alt-button:hover {
+  color: var(--vp-button-alt-hover-text);
+  background-color: var(--vp-button-alt-hover-bg);
+  border: 1px solid var(--vp-button-alt-hover-border);
+}
+.alt-button:active {
+  color: var(--vp-button-alt-active-text);
+  background-color: var(--vp-button-alt-active-bg);
+  border: 1px solid var(--vp-button-alt-active-border);
 }
