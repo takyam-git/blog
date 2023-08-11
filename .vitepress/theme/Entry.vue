@@ -18,6 +18,7 @@ const prev = computed(() =>
     : {
         text: entries[pageIndex.value + 1]?.frontmatter?.title ?? "-",
         link: entries[pageIndex.value + 1]?.url,
+        emoji: entries[pageIndex.value + 1]?.frontmatter?.emoji ?? null,
       },
 );
 // 古いのが「次」扱い
@@ -27,6 +28,7 @@ const next = computed(() =>
     : {
         text: entries[pageIndex.value - 1]?.frontmatter?.title ?? "-",
         link: entries[pageIndex.value - 1]?.url,
+        emoji: entries[pageIndex.value - 1]?.frontmatter?.emoji ?? null,
       },
 );
 </script>
@@ -54,11 +56,16 @@ const next = computed(() =>
       <div v-if="prev || next" class="prev-next-container">
         <a v-if="prev" :href="prev.link" class="prev-next prev">
           <i class="material-icons">arrow_back</i>
-          <span>{{ prev.text }}</span>
+          <span
+            ><i v-if="prev.emoji">{{ prev.emoji }}</i
+            >{{ prev.text }}</span
+          >
         </a>
         <span v-if="!prev || !next" class="spacer" />
         <a v-if="next" :href="next.link" class="prev-next next">
-          <span>{{ next.text }}</span>
+          <span
+            >{{ next.text }}<i v-if="next.emoji">{{ next.emoji }}</i></span
+          >
           <i class="material-icons">arrow_forward</i>
         </a>
       </div>
@@ -132,10 +139,22 @@ const next = computed(() =>
     &.prev {
       justify-content: flex-start;
       text-align: left;
+
+      span {
+        i {
+          margin-right: 0.5rem;
+        }
+      }
     }
     &.next {
       justify-content: flex-end;
       text-align: right;
+
+      span {
+        i {
+          margin-left: 0.5rem;
+        }
+      }
     }
 
     i.material-icons {
@@ -144,6 +163,11 @@ const next = computed(() =>
 
     span {
       flex: 1;
+
+      i {
+        font-weight: normal;
+        font-style: normal;
+      }
     }
   }
 }
