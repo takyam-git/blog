@@ -54,6 +54,18 @@ const next = computed(() =>
       </div>
     </template>
     <template #doc-after>
+      <div class="footer-buttons-container">
+        <a href="/"><i class="material-icons">home</i></a>
+        <div class="twitter-share-button-container">
+          <a
+            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+            class="twitter-share-button"
+            data-show-count="false"
+            data-size="large"
+            >Tweet</a
+          >
+        </div>
+      </div>
       <div v-if="prev || next" class="prev-next-container">
         <a v-if="prev" :href="prev.link" class="prev-next prev">
           <i class="material-icons">arrow_back</i>
@@ -123,6 +135,20 @@ const next = computed(() =>
         }
       }
     }
+  }
+}
+.footer-buttons-container {
+  padding: 2rem 0;
+  border-top: 1px solid var(--vp-c-border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .twitter-share-button-container {
+    background-color: white;
+    border-radius: 22px;
+    padding: 2px;
+    overflow: hidden;
   }
 }
 .prev-next-container {
