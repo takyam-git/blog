@@ -5,6 +5,49 @@ export default defineConfig({
   title: "takos.dev",
   description: "takos blog",
   lang: "ja",
+  head: [
+    ["link", { rel: "icon", href: "/favicon.ico" }],
+    [
+      "link",
+      {
+        rel: "preload",
+        href: "/fonts/material-design-icons-4.0.0.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "",
+      },
+    ],
+    [
+      "script",
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-X9FWQ65JKL",
+        async: true,
+      },
+    ],
+    [
+      "script",
+      {},
+      "window.dataLayer = window.dataLayer || [];" +
+        "  function gtag(){dataLayer.push(arguments);}" +
+        "  gtag('js', new Date());" +
+        "  gtag('config', 'G-X9FWQ65JKL');",
+    ],
+    [
+      "script",
+      {
+        src: "https://platform.twitter.com/widgets.js",
+        charset: "utf-8",
+        async: true,
+      },
+    ],
+    [
+      "meta",
+      { property: "og:image", content: "https://takos.dev/images/takos.jpg" },
+    ],
+    ["meta", { property: "og:site_name", content: "takos.dev" }],
+    ["meta", { property: "twitter:card", content: "summary" }],
+    ["meta", { property: "twitter:site", content: "@takos_dx" }],
+  ],
   themeConfig: {
     nav: [{ text: "Entries", link: "/entries" }],
 
@@ -29,42 +72,9 @@ export default defineConfig({
       .replace(/\.md$/, ".html")}`;
     const isEntry = context.pageData.filePath.startsWith("entries/");
     return [
-      ["link", { rel: "icon", href: "/favicon.ico" }],
-      [
-        "link",
-        {
-          rel: "preload",
-          href: "/fonts/material-design-icons-4.0.0.woff2",
-          as: "font",
-          type: "font/woff2",
-          crossorigin: "",
-        },
-      ],
-      [
-        "meta",
-        { property: "og:image", content: "https://takos.dev/images/takos.jpg" },
-      ],
-      ["meta", { property: "og:site_name", content: "takos.dev" }],
-      ["meta", { property: "twitter:card", content: "summary" }],
-      ["meta", { property: "twitter:site", content: "@takos_dx" }],
       ["meta", { property: "og:title", content: context.pageData.title }],
       ["meta", { property: "og:url", content: ogUrl }],
       ["meta", { property: "og:type", content: isEntry ? "article" : "blog" }],
-      [
-        "script",
-        {
-          src: "https://www.googletagmanager.com/gtag/js?id=G-X9FWQ65JKL",
-          async: true,
-        },
-      ],
-      [
-        "script",
-        {},
-        "window.dataLayer = window.dataLayer || [];" +
-          "  function gtag(){dataLayer.push(arguments);}" +
-          "  gtag('js', new Date());" +
-          "  gtag('config', 'G-X9FWQ65JKL');",
-      ],
     ];
   },
 });

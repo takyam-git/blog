@@ -73,7 +73,9 @@ const next = computed(() =>
     </template>
     <template #doc-bottom>
       <ClientOnly>
-        <edit-page-link :path="route.path" />
+        <div class="edit-page-link-container">
+          <edit-page-link :path="route.path" />
+        </div>
       </ClientOnly>
     </template>
   </VPDoc>
@@ -176,5 +178,9 @@ const next = computed(() =>
       }
     }
   }
+}
+.edit-page-link-container {
+  padding: 3rem 0;
+  text-align: center;
 }
 </style>
