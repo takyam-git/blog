@@ -86,7 +86,7 @@ const next = computed(() =>
     <template #doc-bottom>
       <ClientOnly>
         <div class="edit-page-link-container">
-          <edit-page-link :path="route.path" />
+          <edit-page-link :path="route.path" label="編集する" />
         </div>
       </ClientOnly>
     </template>
